@@ -41,7 +41,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>290</x>
      <y>230</y>
      <width>71</width>
      <height>16</height>
@@ -54,7 +54,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>530</x>
      <y>230</y>
      <width>71</width>
      <height>16</height>
@@ -67,23 +67,11 @@
   <widget class="QLabel" name="videoWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>20</y>
      <width>211</width>
      <height>191</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(107, 255, 218);</string>
@@ -92,26 +80,14 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="videoWidget_2">
+  <widget class="QLabel" name="eyeLeftWidget">
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>250</x>
      <y>20</y>
      <width>211</width>
      <height>191</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(107, 255, 218);</string>
@@ -120,26 +96,14 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="videoWidget_3">
+  <widget class="QLabel" name="eyeRightWidget">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>480</x>
      <y>20</y>
      <width>211</width>
      <height>191</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>211</width>
-     <height>191</height>
-    </size>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(107, 255, 218);</string>

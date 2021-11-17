@@ -63,10 +63,11 @@ class camThread(QThread):
                 print("viewer Dropped (thread 1) ")
                 run_video=False
 
-            resizeImage = qt_image1.scaled(videoWidth, videoHeight)
+            #resizeImage = qt_image1.scaled(videoWidth, videoHeight) 비활성화  ... 눈알 찍히는 이미지 출력예정.
             print("shoot cam!! (thread 1) ")
-            self.changePixmap.emit(resizeImage)#전체 얼굴 프린트.
+            #self.changePixmap.emit(resizeImage)#전체 얼굴 프린트.
             print("emit하면 다음으로 넘어가긴 하나? ")
+
 
             #얼굴과 눈알 계산하기.
             img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)#camera.read 의 image
@@ -96,7 +97,10 @@ class camThread(QThread):
                     #print("qimage print ",qimage)
                     self.eyeList.append(image)
                     print(self.eyeList)
-
+            eyefaceImage = PIL.Image.fromarray(img,'RGB')
+            eyefaceImage = ImageQt(eyefaceImage).copy()
+            eyefaceImage = eyefaceImage.scaled(videoWidth, videoHeight)
+            self.changePixmap.emit(eyefaceImage)
             print("눈알 인식된 이미지 갯수",len(self.eyeList))
             if(len(self.eyeList)<=1):
                 print("양쪽눈이 인식되지 않았습니다. ")
@@ -137,6 +141,14 @@ class WindowClass(QMainWindow, form_class):
 
     @pyqtSlot("PyQt_PyObject")
     def dsplyEyes(self,eyeList):
+        #이미지 크기 위젯에 일치시키기.
+        leftWidgetWidth=self.eyeLeftWidget.width()
+        leftWidgetHeight=self.eyeLeftWidget.width()
+        eyeList[0] = eyeList[0].scaled(leftWidgetWidth,leftWidgetHeight)
+
+        rightWidgetWidth = self.eyeRightWidget.width()
+        rightWidgetHeight = self.eyeRightWidget.width()
+        eyeList[1] = eyeList[1].scaled(rightWidgetWidth, rightWidgetHeight)
 
 
         self.eyeLeftWidget.setPixmap(QPixmap.fromImage(eyeList[0]))

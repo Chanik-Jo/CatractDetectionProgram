@@ -36,20 +36,21 @@ class camThread(QThread):
 
             ret, image = self.camera.read()
 
-            height, width = image.shape[:2]  # 가로세로 해상도.
+            height, width = image.shape[:2]  # 캠에서의 해상도 미사용.
 
             if ret == False:  # 카메라가 정상자동하지 않을시.
                 run_video = False
+            '''
             print("cam read  (thread 1) ")
 
 
             color_swapped_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # cvtColor=convertColor  rgb type.
-            '''
+            
                         웹캠 정상작동여부 테스트
                         testImg = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
                         testImg = Image.fromarray(testImg,'RGB')
                         testImg.show()
-            '''
+            
             qt_image1 = QtGui.QImage(color_swapped_image.data,
                                      width,
                                      height,
@@ -68,7 +69,7 @@ class camThread(QThread):
             #self.changePixmap.emit(resizeImage)#전체 얼굴 프린트.
             print("emit하면 다음으로 넘어가긴 하나? ")
 
-
+            '''
             #얼굴과 눈알 계산하기.
             img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)#camera.read 의 image
             faces = detector.detectMultiScale(img, 1.3, 5)
@@ -99,6 +100,8 @@ class camThread(QThread):
                     print(self.eyeList)
             eyefaceImage = PIL.Image.fromarray(img,'RGB')
             eyefaceImage = ImageQt(eyefaceImage).copy()
+            videoWidth = self.parent.videoWidget.width()
+            videoHeight = self.parent.videoWidget.height()
             eyefaceImage = eyefaceImage.scaled(videoWidth, videoHeight)
             self.changePixmap.emit(eyefaceImage)
             print("눈알 인식된 이미지 갯수",len(self.eyeList))

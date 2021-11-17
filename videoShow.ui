@@ -38,7 +38,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="leftEyeWidgetResult">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -51,7 +51,7 @@
     <string>eyeLeft</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="rightEyeWidgetResult">
    <property name="geometry">
     <rect>
      <x>530</x>

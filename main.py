@@ -243,17 +243,18 @@ class WindowClass(QMainWindow, form_class):
 
         prediction = catractModel.predict(resultPrediction)
 
-        _, a = prediction[0]
-        _, b = prediction[1]
-        print("reuslt a b ",a,b)
-        self.leftEyeWidgetResult.setText(str(a))
-        self.rightEyeWidgetResult.setText(str(b))
+        c, a = prediction[0]
+        d, b = prediction[1]
+        print("학습결과 ",a,b,"\n", "학습데이터 유사도  ",c,d)
+        self.leftEyeWidgetResult.setText(str(int(a*100)))
+        self.rightEyeWidgetResult.setText(str(int(b*100)))
 
 
 
 
 
         '''
+        
         주석처진데는 무쓸모지만 필요할까봐서 남겨둠.
         width = incomingImage1.width()
         height = incomingImage1.height()

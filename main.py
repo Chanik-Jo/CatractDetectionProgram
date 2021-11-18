@@ -73,7 +73,7 @@ class camThread(QThread):
             print("emit하면 다음으로 넘어가긴 하나? ")
 
             '''
-            #얼굴과 눈알 계산하기.
+            #얼굴과 눈알 계산하기.  detectMultiScale q붙은곳은 무조건 무언가를 감지하는 곳이다. 얼굴/눈
             img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)#camera.read 의 image
             faces = detector.detectMultiScale(img, 1.3, 5)
             #print("face detect  (thread2)")
@@ -204,17 +204,19 @@ class WindowClass(QMainWindow, form_class):
         eyeList = eyeImages
 
 
-        #Qimage resize
+        #Qimage(<class 'PyQt5.QtGui.QImage'>  로그찍었을때의 타입.) resize
         tempImg1 = eyeList[0].scaled(128, 128)
         tempImg2 = eyeList[1].scaled(128, 128)
+        tempImg1 = tempImg1.QtGui.QImage.format(QImage.Format_RGBA8888)
+
+        #QImage to numpy 수정중....
 
 
-        #QImage to numpy durl
-        resultPrediction[0]=PIL.Image.fromarray(tempImg1,'RGB')
-        resultPrediction[1]=PIL.Image.fromarray(tempImg2,'RGB')
+        #resultPrediction[0]=PIL.Image.fromarray(tempImg1,'RGB')
+        #resultPrediction[1]=PIL.Image.fromarray(tempImg2,'RGB')
 
-        #resultPrediction[0] = qimage2ndarray.recarray_view(tempImg1) 사용불가
-        #resultPrediction[1]= qimage2ndarray.recarray_view(tempImg2)  사용불능.
+        resultPrediction[0] = qimage2ndarray.recarray_view(tempImg1) #사용불가
+        resultPrediction[1]= qimage2ndarray.recarray_view(tempImg2)  # recarry_view 32bit rgb only
 
         prediction = catractModel.predict(resultPrediction)
 

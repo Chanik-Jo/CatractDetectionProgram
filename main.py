@@ -207,7 +207,20 @@ class WindowClass(QMainWindow, form_class):
         #Qimage(<class 'PyQt5.QtGui.QImage'>  로그찍었을때의 타입.) resize
         tempImg1 = eyeList[0].scaled(128, 128)
         tempImg2 = eyeList[1].scaled(128, 128)
-        tempImg1 = tempImg1.QtGui.QImage.format(QImage.Format_RGBA8888)
+        tempImg1 = tempImg1.convertToFormat(QImage.Format_RGB32)
+        tempImg2 = tempImg2.convertToFormat(QImage.Format_RGB32)
+
+        tempImg1.save("tempimg1.jpg")
+        tempImg2.save("tempimg2.jpg")
+        #다이렉트로 변환이 안되서 이미지로 변환한뒤 불러오는 방식으로 편법사용.
+
+
+        imgLst1 = cv2.imread("tempimg1.jpg",cv2.IMREAD_COLOR)
+        imgLst2 = cv2.imread("tempimg2.jpg",cv2.IMREAD_COLOR)
+
+        resultPrediction[0] = np.asarray(imgLst1)
+        resultPrediction[1] = np.asarray(imgLst2)
+
 
         #QImage to numpy 수정중....
 
@@ -215,16 +228,26 @@ class WindowClass(QMainWindow, form_class):
         #resultPrediction[0]=PIL.Image.fromarray(tempImg1,'RGB')
         #resultPrediction[1]=PIL.Image.fromarray(tempImg2,'RGB')
 
-        resultPrediction[0] = qimage2ndarray.recarray_view(tempImg1) #사용불가
-        resultPrediction[1]= qimage2ndarray.recarray_view(tempImg2)  # recarry_view 32bit rgb only
+
+
+
+
+
+
+
+
+
+
+
+
 
         prediction = catractModel.predict(resultPrediction)
 
         _, a = prediction[0]
         _, b = prediction[1]
-
-        self.leftEyeWidgetResult.setText(a)
-        self.rightEyeWidgetResult.setText(b)
+        print("reuslt a b ",a,b)
+        self.leftEyeWidgetResult.setText(str(a))
+        self.rightEyeWidgetResult.setText(str(b))
 
 
 
